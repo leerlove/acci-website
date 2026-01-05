@@ -1,5 +1,4 @@
-import React from 'react';
-import { ArrowRight, Users, BookOpen, Globe, Heart } from 'lucide-react';
+import { ArrowRight, BookOpen, Globe, Heart, Sparkles, Zap, Network } from 'lucide-react';
 
 const HeroSection = () => {
   return (
@@ -64,50 +63,167 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Visual */}
+          {/* Right Visual - Futuristic Design */}
           <div className="hidden lg:block relative">
-            <div className="relative w-full aspect-square max-w-lg mx-auto">
-              {/* Central Circle */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-white rounded-full shadow-2xl flex items-center justify-center">
-                <div className="text-center">
-                  <Heart className="w-12 h-12 text-primary mx-auto mb-2" />
-                  <span className="text-sm font-semibold text-primary">공존</span>
+            <div className="relative w-full aspect-square max-w-xl mx-auto">
+
+              {/* Animated Background Rings */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="absolute w-[500px] h-[500px] border border-primary/10 rounded-full animate-[spin_30s_linear_infinite]" />
+                <div className="absolute w-[400px] h-[400px] border border-secondary/20 rounded-full animate-[spin_25s_linear_infinite_reverse]" />
+                <div className="absolute w-[300px] h-[300px] border border-primary/15 rounded-full animate-[spin_20s_linear_infinite]" />
+              </div>
+
+              {/* Glowing Particles */}
+              <div className="absolute top-[15%] left-[20%] w-2 h-2 bg-secondary rounded-full animate-pulse shadow-[0_0_20px_rgba(217,139,163,0.8)]" />
+              <div className="absolute top-[25%] right-[15%] w-3 h-3 bg-primary/60 rounded-full animate-pulse shadow-[0_0_25px_rgba(107,45,74,0.6)]" style={{ animationDelay: '0.5s' }} />
+              <div className="absolute bottom-[20%] left-[15%] w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_15px_rgba(242,196,208,0.9)]" style={{ animationDelay: '1s' }} />
+              <div className="absolute bottom-[30%] right-[20%] w-1.5 h-1.5 bg-secondary rounded-full animate-pulse shadow-[0_0_12px_rgba(217,139,163,0.7)]" style={{ animationDelay: '1.5s' }} />
+
+              {/* Central Hexagon Core */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                {/* Outer Glow */}
+                <div className="absolute -inset-8 bg-gradient-to-r from-primary/20 via-secondary/30 to-primary/20 rounded-full blur-2xl animate-pulse" />
+
+                {/* Main Core */}
+                <div className="relative w-40 h-40 bg-gradient-to-br from-white via-white to-primary-50 rounded-3xl shadow-2xl flex items-center justify-center transform rotate-45 border border-white/50">
+                  <div className="transform -rotate-45 text-center">
+                    <div className="relative">
+                      <Heart className="w-14 h-14 text-primary mx-auto mb-2" />
+                      <Sparkles className="w-5 h-5 text-secondary absolute -top-1 -right-1 animate-pulse" />
+                    </div>
+                    <span className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">공존</span>
+                    <p className="text-[10px] text-gray-400 mt-1">COEXISTENCE</p>
+                  </div>
                 </div>
               </div>
 
-              {/* Orbiting Elements */}
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float">
-                <div className="text-center">
-                  <Users className="w-8 h-8 text-secondary mx-auto mb-1" />
-                  <span className="text-xs font-medium text-gray-600">연결</span>
+              {/* Floating Value Cards - Futuristic Style */}
+              {/* Top - 연결 */}
+              <div className="absolute top-[5%] left-1/2 -translate-x-1/2 group">
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-secondary to-primary rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity" />
+                  <div className="relative w-28 h-28 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl flex items-center justify-center border border-white/50 hover:scale-110 hover:-translate-y-2 transition-all duration-500 cursor-pointer">
+                    <div className="text-center">
+                      <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-secondary/20 to-primary/10 rounded-xl flex items-center justify-center">
+                        <Network className="w-6 h-6 text-secondary" />
+                      </div>
+                      <span className="text-sm font-bold text-gray-800">연결</span>
+                      <p className="text-[9px] text-gray-400 mt-0.5">CONNECTION</p>
+                    </div>
+                  </div>
                 </div>
+                {/* Connection Line */}
+                <div className="absolute top-full left-1/2 w-px h-16 bg-gradient-to-b from-secondary/50 to-transparent" />
               </div>
 
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-24 h-24 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float animation-delay-200">
-                <div className="text-center">
-                  <BookOpen className="w-8 h-8 text-primary-600 mx-auto mb-1" />
-                  <span className="text-xs font-medium text-gray-600">연구</span>
+              {/* Bottom - 연구 */}
+              <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 group">
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity" />
+                  <div className="relative w-28 h-28 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl flex items-center justify-center border border-white/50 hover:scale-110 hover:translate-y-2 transition-all duration-500 cursor-pointer">
+                    <div className="text-center">
+                      <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-primary/20 to-secondary/10 rounded-xl flex items-center justify-center">
+                        <BookOpen className="w-6 h-6 text-primary" />
+                      </div>
+                      <span className="text-sm font-bold text-gray-800">연구</span>
+                      <p className="text-[9px] text-gray-400 mt-0.5">RESEARCH</p>
+                    </div>
+                  </div>
                 </div>
+                {/* Connection Line */}
+                <div className="absolute bottom-full left-1/2 w-px h-16 bg-gradient-to-t from-primary/50 to-transparent" />
               </div>
 
-              <div className="absolute top-1/2 left-0 -translate-y-1/2 w-24 h-24 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float animation-delay-300">
-                <div className="text-center">
-                  <Globe className="w-8 h-8 text-primary mx-auto mb-1" />
-                  <span className="text-xs font-medium text-gray-600">소통</span>
+              {/* Left - 소통 */}
+              <div className="absolute top-1/2 left-[5%] -translate-y-1/2 group">
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity" />
+                  <div className="relative w-28 h-28 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl flex items-center justify-center border border-white/50 hover:scale-110 hover:-translate-x-2 transition-all duration-500 cursor-pointer">
+                    <div className="text-center">
+                      <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-primary/15 to-accent/30 rounded-xl flex items-center justify-center">
+                        <Globe className="w-6 h-6 text-primary" />
+                      </div>
+                      <span className="text-sm font-bold text-gray-800">소통</span>
+                      <p className="text-[9px] text-gray-400 mt-0.5">COMMUNICATION</p>
+                    </div>
+                  </div>
                 </div>
+                {/* Connection Line */}
+                <div className="absolute left-full top-1/2 w-16 h-px bg-gradient-to-r from-primary/50 to-transparent" />
               </div>
 
-              <div className="absolute top-1/2 right-0 -translate-y-1/2 w-24 h-24 bg-white rounded-2xl shadow-lg flex items-center justify-center animate-float animation-delay-400">
-                <div className="text-center">
-                  <Heart className="w-8 h-8 text-secondary mx-auto mb-1" />
-                  <span className="text-xs font-medium text-gray-600">포용</span>
+              {/* Right - 포용 */}
+              <div className="absolute top-1/2 right-[5%] -translate-y-1/2 group">
+                <div className="relative">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-secondary to-accent rounded-2xl blur opacity-30 group-hover:opacity-60 transition-opacity" />
+                  <div className="relative w-28 h-28 bg-white/90 backdrop-blur-xl rounded-2xl shadow-xl flex items-center justify-center border border-white/50 hover:scale-110 hover:translate-x-2 transition-all duration-500 cursor-pointer">
+                    <div className="text-center">
+                      <div className="w-12 h-12 mx-auto mb-2 bg-gradient-to-br from-secondary/20 to-accent/30 rounded-xl flex items-center justify-center">
+                        <Heart className="w-6 h-6 text-secondary" />
+                      </div>
+                      <span className="text-sm font-bold text-gray-800">포용</span>
+                      <p className="text-[9px] text-gray-400 mt-0.5">INCLUSION</p>
+                    </div>
+                  </div>
                 </div>
+                {/* Connection Line */}
+                <div className="absolute right-full top-1/2 w-16 h-px bg-gradient-to-l from-secondary/50 to-transparent" />
               </div>
 
-              {/* Connection Lines */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
-                <circle cx="200" cy="200" r="150" fill="none" stroke="#D98BA3" strokeWidth="1" strokeDasharray="5,5" opacity="0.3" />
+              {/* Data Flow Lines - Animated */}
+              <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 500 500">
+                <defs>
+                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#6B2D4A" stopOpacity="0" />
+                    <stop offset="50%" stopColor="#D98BA3" stopOpacity="0.6" />
+                    <stop offset="100%" stopColor="#6B2D4A" stopOpacity="0" />
+                  </linearGradient>
+                  <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                      <feMergeNode in="coloredBlur"/>
+                      <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                  </filter>
+                </defs>
+
+                {/* Animated flowing dots on paths */}
+                <circle r="3" fill="#D98BA3" filter="url(#glow)">
+                  <animateMotion dur="4s" repeatCount="indefinite">
+                    <mpath href="#topPath" />
+                  </animateMotion>
+                </circle>
+                <circle r="3" fill="#6B2D4A" filter="url(#glow)">
+                  <animateMotion dur="4s" repeatCount="indefinite" begin="1s">
+                    <mpath href="#bottomPath" />
+                  </animateMotion>
+                </circle>
+                <circle r="3" fill="#D98BA3" filter="url(#glow)">
+                  <animateMotion dur="4s" repeatCount="indefinite" begin="2s">
+                    <mpath href="#leftPath" />
+                  </animateMotion>
+                </circle>
+                <circle r="3" fill="#6B2D4A" filter="url(#glow)">
+                  <animateMotion dur="4s" repeatCount="indefinite" begin="3s">
+                    <mpath href="#rightPath" />
+                  </animateMotion>
+                </circle>
+
+                {/* Hidden paths for animation */}
+                <path id="topPath" d="M250,80 Q250,180 250,200" fill="none" stroke="none" />
+                <path id="bottomPath" d="M250,420 Q250,320 250,300" fill="none" stroke="none" />
+                <path id="leftPath" d="M80,250 Q180,250 200,250" fill="none" stroke="none" />
+                <path id="rightPath" d="M420,250 Q320,250 300,250" fill="none" stroke="none" />
               </svg>
+
+              {/* Floating Tech Elements */}
+              <div className="absolute top-[35%] left-[25%] animate-float">
+                <Zap className="w-4 h-4 text-secondary/40" />
+              </div>
+              <div className="absolute bottom-[35%] right-[25%] animate-float" style={{ animationDelay: '1s' }}>
+                <Sparkles className="w-4 h-4 text-primary/40" />
+              </div>
             </div>
           </div>
         </div>
