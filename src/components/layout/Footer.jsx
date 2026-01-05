@@ -1,0 +1,160 @@
+import React from 'react';
+import { User, Leaf, PawPrint, MapPin, Phone, Mail, ExternalLink } from 'lucide-react';
+
+const Footer = () => {
+  const footerLinks = [
+    {
+      title: '학회소개',
+      links: [
+        { name: '인사말', href: '#greeting' },
+        { name: '설립목적 및 비전', href: '#purpose' },
+        { name: '조직도', href: '#organization' },
+        { name: '정관', href: '#bylaws' },
+      ],
+    },
+    {
+      title: '학술활동',
+      links: [
+        { name: '학술대회', href: '#conference' },
+        { name: '연구발표회', href: '#presentation' },
+        { name: '정책간담회', href: '#policy' },
+      ],
+    },
+    {
+      title: '학회지',
+      links: [
+        { name: '투고안내', href: '#submission' },
+        { name: '논문검색', href: '#search' },
+        { name: '연구윤리규정', href: '#ethics' },
+      ],
+    },
+    {
+      title: '회원',
+      links: [
+        { name: '회원가입 안내', href: '#join' },
+        { name: '회원혜택', href: '#benefits' },
+        { name: '회비안내', href: '#fee' },
+      ],
+    },
+  ];
+
+  const Logo = () => (
+    <div className="flex items-center gap-3">
+      <div className="flex items-center">
+        <div className="grid grid-cols-2 gap-0.5">
+          <User className="w-4 h-4 text-white/80" strokeWidth={2.5} />
+          <PawPrint className="w-4 h-4 text-secondary-light" strokeWidth={2.5} />
+          <Leaf className="w-4 h-4 text-white/60" strokeWidth={2.5} />
+          <User className="w-4 h-4 text-secondary-light" strokeWidth={2.5} />
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <span className="text-lg font-bold text-white leading-tight">
+          한국반려문화산업학회
+        </span>
+        <span className="text-[10px] text-white/60 tracking-tight">
+          Korean Association of Companion Culture and Industry
+        </span>
+      </div>
+    </div>
+  );
+
+  return (
+    <footer className="bg-primary-900">
+      {/* Main Footer */}
+      <div className="container-custom py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+          {/* Logo & Contact Info */}
+          <div className="lg:col-span-2">
+            <Logo />
+            <p className="mt-6 text-white/70 text-sm leading-relaxed max-w-md">
+              반려시민윤리로 여는 평화적 공존의 시대,<br />
+              지속 가능한 반려산업의 미래를 연구합니다.
+            </p>
+
+            <div className="mt-8 space-y-3">
+              <div className="flex items-start gap-3 text-white/70 text-sm">
+                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                <span>
+                  서울특별시 동대문구 경희대로 26,<br />
+                  경희대학교 네오르네상스관 332호
+                </span>
+              </div>
+              <div className="flex items-center gap-3 text-white/70 text-sm">
+                <Phone className="w-4 h-4 flex-shrink-0" />
+                <span>02-961-0000</span>
+              </div>
+              <div className="flex items-center gap-3 text-white/70 text-sm">
+                <Mail className="w-4 h-4 flex-shrink-0" />
+                <span>contact@kacci.or.kr</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Footer Links */}
+          {footerLinks.map((section) => (
+            <div key={section.title}>
+              <h4 className="text-white font-semibold mb-4">{section.title}</h4>
+              <ul className="space-y-2.5">
+                {section.links.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.href}
+                      className="text-white/60 text-sm hover:text-white transition-colors"
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        {/* Newsletter */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div>
+              <h4 className="text-white font-semibold mb-1">뉴스레터 구독</h4>
+              <p className="text-white/60 text-sm">학회 소식과 학술 정보를 받아보세요.</p>
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="email"
+                placeholder="이메일 주소"
+                className="px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary w-64"
+              />
+              <button className="px-6 py-2.5 bg-secondary text-white font-medium rounded-lg hover:bg-secondary-dark transition-colors">
+                구독
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="border-t border-white/10">
+        <div className="container-custom py-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <p className="text-white/50 text-sm">
+              © 2026 한국반려문화산업학회. All rights reserved.
+            </p>
+            <div className="flex items-center gap-6">
+              <a href="#privacy" className="text-white/50 text-sm hover:text-white transition-colors">
+                개인정보처리방침
+              </a>
+              <a href="#terms" className="text-white/50 text-sm hover:text-white transition-colors">
+                이용약관
+              </a>
+              <a href="#sitemap" className="text-white/50 text-sm hover:text-white transition-colors">
+                사이트맵
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

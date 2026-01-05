@@ -1,0 +1,213 @@
+/* Pretendard 폰트 (CDN) */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* 브랜드 컬러 - 공존 테마 (B) */
+  --color-primary: #6B2D4A;
+  --color-primary-50: #F9F0F4;
+  --color-primary-100: #F2E0E8;
+  --color-primary-200: #E5C1D1;
+  --color-primary-300: #D8A2BA;
+  --color-primary-400: #CB83A3;
+  --color-primary-500: #BE648C;
+  --color-primary-600: #A14B73;
+  --color-primary-700: #843C5D;
+  --color-primary-800: #6B2D4A;
+  --color-primary-900: #521E38;
+
+  --color-secondary: #D98BA3;
+  --color-secondary-light: #F2C4D0;
+  --color-secondary-dark: #C06B87;
+
+  --color-accent: #F2C4D0;
+  --color-accent-light: #F8DDE5;
+  --color-accent-dark: #E9A5B7;
+
+  /* 중립 색상 */
+  --color-gray-50: #F9FAFB;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E5E7EB;
+  --color-gray-300: #D1D5DB;
+  --color-gray-400: #9CA3AF;
+  --color-gray-500: #6B7280;
+  --color-gray-600: #4B5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1F2937;
+  --color-gray-900: #111827;
+
+  /* 애니메이션 */
+  --animate-fade-in: fadeIn 0.6s ease-out;
+  --animate-slide-up: slideUp 0.6s ease-out;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    @apply text-gray-800 bg-white antialiased m-0 p-0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
+    @apply font-bold;
+  }
+
+  a {
+    @apply transition-colors duration-200 no-underline;
+    color: inherit;
+  }
+
+  /* 스크롤바 스타일링 */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-300 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-400;
+  }
+}
+
+@layer components {
+  /* 컨테이너 */
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  /* 버튼 스타일 */
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-primary text-white font-semibold rounded-lg
+           hover:bg-primary-700 focus:outline-none focus:ring-2
+           focus:ring-primary-500 focus:ring-offset-2
+           transition-all duration-200 ease-in-out
+           shadow-sm hover:shadow-md;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-white text-primary border-2 border-primary font-semibold rounded-lg
+           hover:bg-primary-50 focus:outline-none focus:ring-2
+           focus:ring-primary-500 focus:ring-offset-2
+           transition-all duration-200 ease-in-out;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center px-6 py-3
+           bg-transparent text-primary border border-primary font-medium rounded-lg
+           hover:bg-primary hover:text-white focus:outline-none focus:ring-2
+           focus:ring-primary-500 focus:ring-offset-2
+           transition-all duration-200 ease-in-out;
+  }
+
+  /* 카드 스타일 */
+  .card {
+    @apply bg-white rounded-2xl p-6 border border-gray-100
+           shadow-sm hover:shadow-lg transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:-translate-y-1;
+  }
+
+  /* 섹션 타이틀 */
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-gray-900 mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-600 max-w-2xl;
+  }
+
+  /* 네비게이션 */
+  .nav-link {
+    @apply text-gray-700 hover:text-primary font-medium
+           transition-colors duration-200 py-2;
+  }
+
+  .nav-link-active {
+    @apply text-primary font-semibold;
+  }
+
+  /* 그라데이션 */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #6B2D4A 0%, #843C5D 50%, #A14B73 100%);
+  }
+
+  .bg-gradient-soft {
+    background: linear-gradient(180deg, #F9F0F4 0%, #FFFFFF 100%);
+  }
+
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #F9F0F4 0%, #F2C4D0 50%, #FFFFFF 100%);
+  }
+
+  /* 텍스트 그라데이션 */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #6B2D4A 0%, #D98BA3 100%);
+  }
+
+  /* 로고 심볼 - 공존 테마 */
+  .logo-symbol {
+    @apply flex items-center gap-1;
+  }
+
+  .logo-symbol .person {
+    @apply w-3 h-3 bg-primary rounded-full;
+  }
+
+  .logo-symbol .paw {
+    @apply text-secondary text-lg;
+  }
+
+  .logo-symbol .leaf {
+    @apply text-primary-600 text-lg;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* 애니메이션 지연 */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+}
