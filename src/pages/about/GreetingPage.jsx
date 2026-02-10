@@ -7,16 +7,13 @@ const GreetingPage = () => {
       <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
         <div className="p-8 md:p-10">
           <div className="flex flex-col md:flex-row gap-8">
-            {/* Photo placeholder */}
+            {/* Chairman photo */}
             <div className="flex-shrink-0">
-              <div className="w-48 h-60 bg-gradient-soft rounded-2xl flex items-center justify-center border border-gray-100">
-                <div className="text-center">
-                  <div className="w-20 h-20 bg-primary/10 rounded-full mx-auto mb-3 flex items-center justify-center">
-                    <span className="text-3xl text-primary font-bold">회</span>
-                  </div>
-                  <p className="text-sm text-gray-400">회장 사진</p>
-                </div>
-              </div>
+              <img
+                src="/images/chairman.png"
+                alt="유광석 학회장"
+                className="w-48 h-60 rounded-2xl object-cover shadow-md border border-gray-200"
+              />
             </div>
 
             {/* Greeting text */}
@@ -26,37 +23,24 @@ const GreetingPage = () => {
               </div>
 
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                함께 사는 내일을 연구하는<br />
-                <span className="text-gradient">한국반려문화산업학회</span>에 오신 것을 환영합니다.
+                한국반려문화산업학회에 오신 것을 진심으로 환영합니다.
               </h2>
 
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
-                  안녕하십니까. 한국반려문화산업학회 회장입니다.
+                  오늘날 반려문화(companion culture)는 인간과 인간의 관계뿐만 아니라, 동물, 식물, 로봇, 그리고 지구 그 자체와 같은 다양한 비인간 존재들과의 동반자적 관계성(companionship)에 대한 개인적 신념과 철학, 사회윤리와 책임, 그리고 국가 수준의 산업과 정책에 지대한 영향을 미치면서 새로운 문명패러다임을 창조하고 있습니다.
                 </p>
                 <p>
-                  우리 사회에서 반려동물, 반려식물, 반려로봇 등 다양한 반려주체와의
-                  공존은 이제 선택이 아닌 시대적 요청이 되었습니다.
-                  한국반려문화산업학회는 이러한 시대적 변화에 학문적으로 응답하고자
-                  2026년 1월 창립되었습니다.
+                  이러한 시대적 배경에서 한국반려문화산업학회는 급변하는 반려문화의 이론과 현실에 깊이 관계된 전문가들의 학문적, 정책적 및 산업적 연구성과를 공유하고, 나아가 이러한 전문가적 통찰력을 기초로 지속가능하고 호혜적인 반려시민문화의 정립과 확산에 기여하고자 합니다.
                 </p>
                 <p>
-                  본 학회는 반려문화 및 산업 전반에 관한 학제간 연구와 실천,
-                  정책적 대안 제시를 통해 학문적 발전에 기여하고,
-                  반려시민윤리의 정립과 확산을 목표로 합니다.
-                </p>
-                <p>
-                  인간과 비인간 반려주체들이 평화롭게 공존하는 사회를 만들어가는 데
-                  뜻을 함께하는 연구자, 실무자, 시민 여러분의 많은 관심과 참여를
-                  부탁드립니다.
-                </p>
-                <p className="font-medium text-gray-800">
-                  감사합니다.
+                  연구자, 활동가, 종교단체, 기업체, 공공기관 등 다양한 분야의 참신하고 역량 있는 회원들을 환영하며 각자의 영역에서 본 학회의 발전을 위해 고견과 충고를 주시기 바랍니다.
                 </p>
               </div>
 
               <div className="mt-8 pt-6 border-t border-gray-100">
-                <p className="text-primary font-bold text-lg">한국반려문화산업학회 회장</p>
+                <p className="text-sm text-gray-500 mb-1">한국반려문화산업학회 회장</p>
+                <p className="text-primary font-bold text-lg">유 광 석 드림</p>
               </div>
             </div>
           </div>
