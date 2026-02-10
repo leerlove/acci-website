@@ -10,6 +10,7 @@ export const navigation = [
       { name: '설립목적 및 비전', path: '/about/purpose' },
       { name: '연혁', path: '/about/history' },
       { name: '조직도', path: '/about/organization' },
+      { name: '임원단', path: '/about/executives' },
       { name: '정관', path: '/about/bylaws' },
       { name: '오시는 길', path: '/about/location' },
     ],

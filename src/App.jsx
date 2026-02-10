@@ -12,6 +12,7 @@ const PurposePage = lazy(() => import('./pages/about/PurposePage'));
 const HistoryPage = lazy(() => import('./pages/about/HistoryPage'));
 const OrganizationPage = lazy(() => import('./pages/about/OrganizationPage'));
 const BylawsPage = lazy(() => import('./pages/about/BylawsPage'));
+const ExecutivesPage = lazy(() => import('./pages/about/ExecutivesPage'));
 const LocationPage = lazy(() => import('./pages/about/LocationPage'));
 const ConferencePage = lazy(() => import('./pages/academic/ConferencePage'));
 const PresentationPage = lazy(() => import('./pages/academic/PresentationPage'));
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/about/purpose" element={<PurposePage />} />
           <Route path="/about/history" element={<HistoryPage />} />
           <Route path="/about/organization" element={<OrganizationPage />} />
+          <Route path="/about/executives" element={<ExecutivesPage />} />
           <Route path="/about/bylaws" element={<BylawsPage />} />
           <Route path="/about/location" element={<LocationPage />} />
 
