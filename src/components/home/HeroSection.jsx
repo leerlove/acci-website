@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, Globe, Heart, Sparkles, Zap, Network } from 'lucide-react';
 
 const HeroSection = () => {
@@ -35,13 +36,13 @@ const HeroSection = () => {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <a href="#about" className="btn-primary gap-2 group">
+              <Link to="/about" className="btn-primary gap-2 group">
                 학회 소개
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a href="#membership" className="btn-secondary">
+              </Link>
+              <Link to="/membership" className="btn-secondary">
                 회원가입 안내
-              </a>
+              </Link>
             </div>
 
             {/* Stats */}

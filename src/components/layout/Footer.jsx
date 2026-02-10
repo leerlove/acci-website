@@ -1,63 +1,43 @@
-import React from 'react';
-import { User, Leaf, PawPrint, MapPin, Phone, Mail, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import Logo from '../common/Logo';
 
 const Footer = () => {
   const footerLinks = [
     {
       title: '학회소개',
       links: [
-        { name: '인사말', href: '#greeting' },
-        { name: '설립목적 및 비전', href: '#purpose' },
-        { name: '조직도', href: '#organization' },
-        { name: '정관', href: '#bylaws' },
+        { name: '인사말', path: '/about/greeting' },
+        { name: '설립목적 및 비전', path: '/about/purpose' },
+        { name: '조직도', path: '/about/organization' },
+        { name: '정관', path: '/about/bylaws' },
       ],
     },
     {
       title: '학술활동',
       links: [
-        { name: '학술대회', href: '#conference' },
-        { name: '연구발표회', href: '#presentation' },
-        { name: '정책간담회', href: '#policy' },
+        { name: '학술대회', path: '/academic/conference' },
+        { name: '연구발표회', path: '/academic/presentation' },
+        { name: '정책간담회', path: '/academic/policy' },
       ],
     },
     {
       title: '학회지',
       links: [
-        { name: '투고안내', href: '#submission' },
-        { name: '논문검색', href: '#search' },
-        { name: '연구윤리규정', href: '#ethics' },
+        { name: '투고안내', path: '/journal/submission' },
+        { name: '논문검색', path: '/journal/search' },
+        { name: '연구윤리규정', path: '/journal/ethics' },
       ],
     },
     {
       title: '회원',
       links: [
-        { name: '회원가입 안내', href: '#join' },
-        { name: '회원혜택', href: '#benefits' },
-        { name: '회비안내', href: '#fee' },
+        { name: '회원가입 안내', path: '/membership/guide' },
+        { name: '회원혜택', path: '/membership/benefits' },
+        { name: '회비안내', path: '/membership/fee' },
       ],
     },
   ];
-
-  const Logo = () => (
-    <div className="flex items-center gap-3">
-      <div className="flex items-center">
-        <div className="grid grid-cols-2 gap-0.5">
-          <User className="w-4 h-4 text-white/80" strokeWidth={2.5} />
-          <PawPrint className="w-4 h-4 text-secondary-light" strokeWidth={2.5} />
-          <Leaf className="w-4 h-4 text-white/60" strokeWidth={2.5} />
-          <User className="w-4 h-4 text-secondary-light" strokeWidth={2.5} />
-        </div>
-      </div>
-      <div className="flex flex-col">
-        <span className="text-lg font-bold text-white leading-tight">
-          한국반려문화산업학회
-        </span>
-        <span className="text-[10px] text-white/60 tracking-tight">
-          Korean Association of Companion Culture and Industry
-        </span>
-      </div>
-    </div>
-  );
 
   return (
     <footer className="bg-primary-900">
@@ -66,7 +46,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
           {/* Logo & Contact Info */}
           <div className="lg:col-span-2">
-            <Logo />
+            <Logo variant="footer" />
             <p className="mt-6 text-white/70 text-sm leading-relaxed max-w-md">
               반려시민윤리로 여는 평화적 공존의 시대,<br />
               지속 가능한 반려산업의 미래를 연구합니다.
@@ -98,12 +78,12 @@ const Footer = () => {
               <ul className="space-y-2.5">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.path}
                       className="text-white/60 text-sm hover:text-white transition-colors"
                     >
                       {link.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -140,15 +120,15 @@ const Footer = () => {
               © 2026 한국반려문화산업학회. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
-              <a href="#privacy" className="text-white/50 text-sm hover:text-white transition-colors">
+              <Link to="/privacy" className="text-white/50 text-sm hover:text-white transition-colors">
                 개인정보처리방침
-              </a>
-              <a href="#terms" className="text-white/50 text-sm hover:text-white transition-colors">
+              </Link>
+              <Link to="/terms" className="text-white/50 text-sm hover:text-white transition-colors">
                 이용약관
-              </a>
-              <a href="#sitemap" className="text-white/50 text-sm hover:text-white transition-colors">
+              </Link>
+              <Link to="/sitemap" className="text-white/50 text-sm hover:text-white transition-colors">
                 사이트맵
-              </a>
+              </Link>
             </div>
           </div>
         </div>

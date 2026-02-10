@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://kacci.or.kr/</loc><priority>1.0</priority></url>
+  <url><loc>https://kacci.or.kr/about/greeting</loc><priority>0.8</priority></url>
+  <url><loc>https://kacci.or.kr/about/purpose</loc><priority>0.8</priority></url>
+  <url><loc>https://kacci.or.kr/about/history</loc><priority>0.6</priority></url>
+  <url><loc>https://kacci.or.kr/about/organization</loc><priority>0.6</priority></url>
+  <url><loc>https://kacci.or.kr/about/bylaws</loc><priority>0.5</priority></url>
+  <url><loc>https://kacci.or.kr/about/location</loc><priority>0.7</priority></url>
+  <url><loc>https://kacci.or.kr/academic/conference</loc><priority>0.7</priority></url>
+  <url><loc>https://kacci.or.kr/academic/presentation</loc><priority>0.5</priority></url>
+  <url><loc>https://kacci.or.kr/academic/policy</loc><priority>0.5</priority></url>
+  <url><loc>https://kacci.or.kr/journal/submission</loc><priority>0.7</priority></url>
+  <url><loc>https://kacci.or.kr/journal/search</loc><priority>0.6</priority></url>
+  <url><loc>https://kacci.or.kr/journal/latest</loc><priority>0.6</priority></url>
+  <url><loc>https://kacci.or.kr/journal/ethics</loc><priority>0.5</priority></url>
+  <url><loc>https://kacci.or.kr/news/notice</loc><priority>0.8</priority></url>
+  <url><loc>https://kacci.or.kr/news/updates</loc><priority>0.6</priority></url>
+  <url><loc>https://kacci.or.kr/news/press</loc><priority>0.6</priority></url>
+  <url><loc>https://kacci.or.kr/membership/guide</loc><priority>0.8</priority></url>
+  <url><loc>https://kacci.or.kr/membership/benefits</loc><priority>0.7</priority></url>
+  <url><loc>https://kacci.or.kr/membership/fee</loc><priority>0.7</priority></url>
+  <url><loc>https://kacci.or.kr/resources/publications</loc><priority>0.5</priority></url>
+  <url><loc>https://kacci.or.kr/resources/research</loc><priority>0.5</priority></url>
+  <url><loc>https://kacci.or.kr/resources/gallery</loc><priority>0.4</priority></url>
+  <url><loc>https://kacci.or.kr/contact</loc><priority>0.7</priority></url>
+  <url><loc>https://kacci.or.kr/contact/faq</loc><priority>0.6</priority></url>
+</urlset>

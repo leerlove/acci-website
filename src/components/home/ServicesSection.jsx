@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import { BookOpen, Users, FileText, Globe, Cpu, MessageSquare, GraduationCap, Building2, ArrowRight } from 'lucide-react';
 
 const ServicesSection = () => {
@@ -73,7 +73,7 @@ const ServicesSection = () => {
 
         {/* Services Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
+          {services.map((service) => (
             <div
               key={service.title}
               className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-primary/20 hover:shadow-lg transition-all duration-300 group"
@@ -97,10 +97,10 @@ const ServicesSection = () => {
 
         {/* CTA */}
         <div className="mt-12 text-center">
-          <a href="#academic" className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+          <Link to="/academic" className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
             학술활동 자세히 보기
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

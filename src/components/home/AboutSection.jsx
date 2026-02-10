@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Link2, Users, MessageCircle, Heart, ArrowRight } from 'lucide-react';
 
 const AboutSection = () => {
@@ -60,10 +61,10 @@ const AboutSection = () => {
                 지속 가능한 반려산업의 미래를 연구하고, 인간과 비인간 반려주체들이
                 평화롭게 공존하는 사회를 만들어가는 학술 플랫폼입니다.
               </p>
-              <a href="#purpose" className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+              <Link to="/about/purpose" className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
                 설립목적 자세히 보기
                 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
             <div className="bg-white rounded-2xl p-6 shadow-sm">
               <blockquote className="text-lg text-gray-700 italic border-l-4 border-primary pl-4">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Users, BookOpen, Award, Calendar } from 'lucide-react';
 
 const CTASection = () => {
@@ -52,19 +53,19 @@ const CTASection = () => {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a
-                href="#join"
+              <Link
+                to="/membership/guide"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-semibold rounded-xl hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl"
               >
                 창립회원 가입하기
                 <ArrowRight className="w-5 h-5" />
-              </a>
-              <a
-                href="#benefits"
+              </Link>
+              <Link
+                to="/membership/benefits"
                 className="inline-flex items-center gap-2 px-8 py-4 bg-transparent text-white font-semibold rounded-xl border-2 border-white/30 hover:bg-white/10 transition-all"
               >
                 회원혜택 보기
-              </a>
+              </Link>
             </div>
 
             {/* Membership Info */}

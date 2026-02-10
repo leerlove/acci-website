@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Calendar, ArrowRight, Bell, Newspaper, FileText } from 'lucide-react';
 
 const NewsSection = () => {
@@ -78,16 +79,16 @@ const NewsSection = () => {
                 <Bell className="w-5 h-5 text-primary" />
                 <h3 className="text-xl font-bold text-gray-900">공지사항</h3>
               </div>
-              <a href="#notice" className="text-sm text-gray-500 hover:text-primary flex items-center gap-1">
+              <Link to="/news/notice" className="text-sm text-gray-500 hover:text-primary flex items-center gap-1">
                 더보기 <ArrowRight className="w-4 h-4" />
-              </a>
+              </Link>
             </div>
 
             <div className="bg-gray-50 rounded-2xl overflow-hidden">
               {notices.map((notice, index) => (
-                <a
+                <Link
                   key={notice.id}
-                  href={`#notice-${notice.id}`}
+                  to="/news/notice"
                   className={`flex items-center gap-4 px-6 py-4 hover:bg-primary-50/50 transition-colors ${
                     index !== notices.length - 1 ? 'border-b border-gray-100' : ''
                   }`}
@@ -106,7 +107,7 @@ const NewsSection = () => {
                     )}
                   </span>
                   <span className="text-sm text-gray-400 hidden sm:block">{notice.date}</span>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -137,19 +138,19 @@ const NewsSection = () => {
                 </div>
               ))}
 
-              <a
-                href="#events"
+              <Link
+                to="/academic/conference"
                 className="block text-center py-4 border-2 border-dashed border-gray-200 rounded-2xl text-gray-500 hover:border-primary hover:text-primary transition-colors"
               >
                 전체 일정 보기
-              </a>
+              </Link>
             </div>
           </div>
         </div>
 
         {/* Quick Links */}
         <div className="mt-12 grid sm:grid-cols-3 gap-4">
-          <a href="#notice" className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-primary-50 transition-colors group">
+          <Link to="/news/notice" className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-primary-50 transition-colors group">
             <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center group-hover:bg-primary transition-colors">
               <Bell className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
             </div>
@@ -157,8 +158,8 @@ const NewsSection = () => {
               <h4 className="font-semibold text-gray-900">공지사항</h4>
               <p className="text-sm text-gray-500">학회 주요 공지</p>
             </div>
-          </a>
-          <a href="#news-list" className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-primary-50 transition-colors group">
+          </Link>
+          <Link to="/news/updates" className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-primary-50 transition-colors group">
             <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center group-hover:bg-primary transition-colors">
               <Newspaper className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
             </div>
@@ -166,8 +167,8 @@ const NewsSection = () => {
               <h4 className="font-semibold text-gray-900">학회소식</h4>
               <p className="text-sm text-gray-500">활동 및 소식</p>
             </div>
-          </a>
-          <a href="#press" className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-primary-50 transition-colors group">
+          </Link>
+          <Link to="/news/press" className="flex items-center gap-4 p-5 bg-gray-50 rounded-xl hover:bg-primary-50 transition-colors group">
             <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center group-hover:bg-primary transition-colors">
               <FileText className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
             </div>
@@ -175,7 +176,7 @@ const NewsSection = () => {
               <h4 className="font-semibold text-gray-900">보도자료</h4>
               <p className="text-sm text-gray-500">언론 보도</p>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
