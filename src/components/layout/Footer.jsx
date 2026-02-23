@@ -22,7 +22,7 @@ const Footer = () => {
       ],
     },
     {
-      title: '학회지',
+      title: '학회지 <반려문화>',
       links: [
         { name: '투고안내', path: '/journal/submission' },
         { name: '논문검색', path: '/journal/search' },
@@ -62,7 +62,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <Phone className="w-4 h-4 flex-shrink-0" />
-                <span>02-961-0000</span>
+                <span>02-961-0481</span>
               </div>
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <Mail className="w-4 h-4 flex-shrink-0" />

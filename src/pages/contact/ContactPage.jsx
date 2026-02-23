@@ -82,7 +82,7 @@ const ContactPage = () => {
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 text-primary flex-shrink-0" />
-                <span className="text-gray-600">02-961-0000</span>
+                <span className="text-gray-600">02-961-0481</span>
               </div>
               <div className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 text-primary flex-shrink-0" />

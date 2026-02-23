@@ -174,12 +174,12 @@ const ExecutivesPage = () => {
       ]
     },
     {
-      category: '행정조교',
+      category: '행정간사',
       icon: UserCog,
       members: [
         {
-          name: '장우성',
-          role: '행정조교',
+          name: '장헤연',
+          role: '행정간사',
           affiliation: '경희대학교',
           photo: null,
           bio: []

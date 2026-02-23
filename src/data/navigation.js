@@ -25,7 +25,7 @@ export const navigation = [
     ],
   },
   {
-    name: '학회지',
+    name: '학회지 <반려문화>',
     path: '/journal',
     children: [
       { name: '투고안내', path: '/journal/submission' },

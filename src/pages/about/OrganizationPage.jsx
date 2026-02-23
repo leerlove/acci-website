@@ -35,7 +35,7 @@ const OrganizationPage = () => {
       { name: '대외협력위원회', chair: '김은기', affiliation: '고려대' },
     ],
     admin: {
-      name: '장우성',
+      name: '장헤연',
       affiliation: '경희대',
     },
   };
@@ -56,55 +56,54 @@ const OrganizationPage = () => {
 
         {/* Organizational Chart */}
         <div className="relative">
-          {/* President */}
+          {/* President + Vice Presidents & Advisors - Top Row */}
           <div className="flex flex-col items-center mb-12">
-            <div className="bg-white rounded-2xl border-2 border-primary shadow-lg p-8 max-w-sm w-full text-center relative">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4">
-                <Crown className="w-8 h-8 text-white" />
+            <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 w-full">
+              {/* President + Vice Presidents Box */}
+              <div className="bg-white rounded-2xl border-2 border-primary shadow-lg p-8 text-center flex-1 max-w-lg">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4">
+                  <Crown className="w-8 h-8 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-1">학회장</h3>
+                <p className="text-lg font-semibold text-primary mb-1">{orgData.president.name}</p>
+                <p className="text-sm text-gray-500 mb-6">{orgData.president.affiliation}</p>
+                {/* Vice Presidents inside same box */}
+                <div className="border-t border-gray-200 pt-4">
+                  <div className="flex items-center justify-center gap-2 mb-3">
+                    <Star className="w-4 h-4 text-primary" />
+                    <h4 className="text-sm font-bold text-gray-900">부회장</h4>
+                  </div>
+                  <div className="flex justify-center gap-6">
+                    {orgData.vicePresidents.map((vp, idx) => (
+                      <div key={idx} className="text-center">
+                        <p className="font-semibold text-primary text-sm">{vp.name}</p>
+                        <p className="text-xs text-gray-500">{vp.affiliation}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-1">학회장</h3>
-              <p className="text-lg font-semibold text-primary mb-1">{orgData.president.name}</p>
-              <p className="text-sm text-gray-500">{orgData.president.affiliation}</p>
+
+              {/* Advisors Box */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center lg:self-center max-w-xs">
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <div className="inline-flex items-center justify-center w-10 h-10 bg-primary/10 rounded-xl">
+                    <Award className="w-5 h-5 text-primary" />
+                  </div>
+                  <h4 className="text-sm font-bold text-gray-900">고문단</h4>
+                </div>
+                <div className="space-y-2">
+                  {orgData.advisors.map((advisor, idx) => (
+                    <div key={idx}>
+                      <p className="font-semibold text-primary text-sm">{advisor.name}</p>
+                      <p className="text-xs text-gray-500">{advisor.affiliation}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
             {/* Connecting line */}
-            <div className="w-0.5 h-8 bg-gray-300"></div>
-          </div>
-
-          {/* Vice Presidents & Advisors */}
-          <div className="mb-12">
-            <div className="grid md:grid-cols-5 gap-4 mb-8">
-              {/* Vice Presidents */}
-              {orgData.vicePresidents.map((vp, idx) => (
-                <div key={idx} className="md:col-span-1">
-                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center h-full">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-3">
-                      <Star className="w-6 h-6 text-primary" />
-                    </div>
-                    <h4 className="text-sm font-bold text-gray-900 mb-2">부회장</h4>
-                    <p className="font-semibold text-primary text-sm mb-1">{vp.name}</p>
-                    <p className="text-xs text-gray-500">{vp.affiliation}</p>
-                  </div>
-                </div>
-              ))}
-
-              {/* Advisors */}
-              {orgData.advisors.map((advisor, idx) => (
-                <div key={idx} className="md:col-span-1">
-                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center h-full">
-                    <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-3">
-                      <Award className="w-6 h-6 text-primary" />
-                    </div>
-                    <h4 className="text-sm font-bold text-gray-900 mb-2">고문</h4>
-                    <p className="font-semibold text-primary text-sm mb-1">{advisor.name}</p>
-                    <p className="text-xs text-gray-500">{advisor.affiliation}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* Connecting line */}
-            <div className="flex justify-center">
-              <div className="w-0.5 h-8 bg-gray-300"></div>
-            </div>
+            <div className="w-0.5 h-8 bg-gray-300 mt-4"></div>
           </div>
 
           {/* Standing Directors */}
@@ -166,7 +165,7 @@ const OrganizationPage = () => {
               <div className="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-xl mb-3">
                 <UserCog className="w-6 h-6 text-primary" />
               </div>
-              <h4 className="text-sm font-bold text-gray-900 mb-2">행정조교</h4>
+              <h4 className="text-sm font-bold text-gray-900 mb-2">행정간사</h4>
               <p className="font-semibold text-primary text-sm mb-1">{orgData.admin.name}</p>
               <p className="text-xs text-gray-500">{orgData.admin.affiliation}</p>
             </div>
