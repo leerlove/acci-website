@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail } from 'lucide-react';
+import { MapPin, Phone, Mail, CheckCircle } from 'lucide-react';
 import Logo from '../common/Logo';
 
 const Footer = () => {
+  const [newsletterEmail, setNewsletterEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState(null); // null | 'success' | 'error'
+
+  const handleNewsletterSubmit = (e) => {
+    e.preventDefault();
+    if (!newsletterEmail || !newsletterEmail.includes('@')) {
+      setNewsletterStatus('error');
+      return;
+    }
+    // TODO: 실제 뉴스레터 구독 API 연동 시 이곳에 fetch 추가
+    setNewsletterStatus('success');
+    setNewsletterEmail('');
+    setTimeout(() => setNewsletterStatus(null), 5000);
+  };
   const footerLinks = [
     {
       title: '학회소개',
@@ -98,15 +113,28 @@ const Footer = () => {
               <h4 className="text-white font-semibold mb-1">뉴스레터 구독</h4>
               <p className="text-white/60 text-sm">학회 소식과 학술 정보를 받아보세요.</p>
             </div>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder="이메일 주소"
-                className="px-4 py-2.5 rounded-lg bg-white/10 border border-white/20 text-white placeholder:text-white/40 focus:outline-none focus:border-secondary w-64"
-              />
-              <button className="px-6 py-2.5 bg-secondary text-white font-medium rounded-lg hover:bg-secondary-dark transition-colors">
-                구독
-              </button>
+            <div>
+              {newsletterStatus === 'success' ? (
+                <div className="flex items-center gap-2 text-green-300 text-sm">
+                  <CheckCircle className="w-4 h-4" />
+                  <span>구독 신청이 완료되었습니다. 감사합니다!</span>
+                </div>
+              ) : (
+                <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
+                  <input
+                    type="email"
+                    placeholder="이메일 주소"
+                    value={newsletterEmail}
+                    onChange={(e) => { setNewsletterEmail(e.target.value); setNewsletterStatus(null); }}
+                    className={`px-4 py-2.5 rounded-lg bg-white/10 border text-white placeholder:text-white/40 focus:outline-none focus:border-secondary w-64 ${
+                      newsletterStatus === 'error' ? 'border-red-400' : 'border-white/20'
+                    }`}
+                  />
+                  <button type="submit" className="px-6 py-2.5 bg-secondary text-white font-medium rounded-lg hover:bg-secondary-dark transition-colors">
+                    구독
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
