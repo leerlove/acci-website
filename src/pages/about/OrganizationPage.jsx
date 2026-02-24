@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import SubpageLayout from '../../components/common/SubpageLayout';
-import { Crown, Star, Award, Users, BookOpen, UserCog } from 'lucide-react';
+import { Crown, Award, Users, BookOpen, UserCog } from 'lucide-react';
 
 const OrganizationPage = () => {
   const orgData = {
@@ -9,7 +9,6 @@ const OrganizationPage = () => {
       affiliation: '경희대',
     },
     vicePresidents: [
-      { name: '김덕삼', affiliation: '대진대' },
       { name: '토마스 김성은', affiliation: '동국대' },
     ],
     advisors: [
@@ -21,12 +20,12 @@ const OrganizationPage = () => {
       { role: '연구이사', name: '주소연', affiliation: '대진대' },
       { role: '총무이사', name: '이수현', affiliation: '경희대' },
       { role: '편집이사', name: '김현석', affiliation: '부산디지털대' },
-      { role: '학술이사', name: '최해성', affiliation: '연세대' },
+      { role: '학술이사', name: '김덕삼', affiliation: '대진대' },
       { role: '대외협력이사', name: '강성일', affiliation: '한국반려동물장례연구소장' },
       { role: '산업이사', name: '김지연', affiliation: '주식회사반려동물' },
       { role: '산업이사', name: '문진희', affiliation: '정진바이오사이언스' },
       { role: 'AI 기술이사', name: '이광식', affiliation: '고려대' },
-      { role: 'AI 기술이사', name: '이대섭', affiliation: 'Inervet 대표' },
+      { role: 'AI 기술이사', name: '이대섭', affiliation: '주식회사 이너벳' },
     ],
     committees: [
       { name: '편집위원회', chair: '김종만', affiliation: '경희대' },
@@ -58,43 +57,99 @@ const OrganizationPage = () => {
         <div className="relative">
           {/* President + Vice Presidents & Advisors - Top Row */}
           <div className="flex flex-col items-center mb-12">
-            <div className="flex flex-col lg:flex-row items-center lg:items-start justify-center gap-6 w-full">
-              {/* President + Vice Presidents Box */}
-              <div className="bg-white rounded-2xl border-2 border-primary shadow-lg p-8 text-center flex-1 max-w-lg">
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4">
-                  <Crown className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-1">학회장</h3>
-                <p className="text-lg font-semibold text-primary mb-1">{orgData.president.name}</p>
-                <p className="text-sm text-gray-500 mb-6">{orgData.president.affiliation}</p>
-                {/* Vice Presidents inside same box */}
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="flex items-center justify-center gap-2 mb-3">
-                    <Star className="w-4 h-4 text-primary" />
-                    <h4 className="text-sm font-bold text-gray-900">부회장</h4>
+            {/* 데스크탑: 회장단 중앙 + 고문단 오른쪽 연결 */}
+            <div className="hidden lg:flex justify-center">
+              <div className="relative">
+                {/* 회장단 박스 - 중앙 */}
+                <div className="bg-white rounded-2xl border-2 border-primary shadow-lg px-14 py-8 text-center">
+                  {/* 회장단 타이틀 */}
+                  <div className="flex items-center justify-center gap-2 mb-5">
+                    <div className="inline-flex items-center justify-center w-10 h-10 bg-primary rounded-xl">
+                      <Crown className="w-5 h-5 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-gray-900">회장단</h3>
                   </div>
-                  <div className="flex justify-center gap-6">
+                  <div className="flex items-center justify-center gap-12">
+                    {/* 학회장 */}
+                    <div className="text-center">
+                      <h4 className="text-sm font-bold text-gray-900 mb-1">학회장</h4>
+                      <p className="text-base font-semibold text-primary">{orgData.president.name}</p>
+                      <p className="text-sm text-gray-500">{orgData.president.affiliation}</p>
+                    </div>
+                    {/* 부회장들 */}
                     {orgData.vicePresidents.map((vp, idx) => (
                       <div key={idx} className="text-center">
-                        <p className="font-semibold text-primary text-sm">{vp.name}</p>
-                        <p className="text-xs text-gray-500">{vp.affiliation}</p>
+                        <h4 className="text-sm font-bold text-gray-900 mb-1">부회장</h4>
+                        <p className="text-base font-semibold text-primary">{vp.name}</p>
+                        <p className="text-sm text-gray-500">{vp.affiliation}</p>
                       </div>
                     ))}
                   </div>
                 </div>
+                {/* 가로 연결선 + 고문단 박스 (회장단 바로 오른쪽) */}
+                <div className="absolute left-full top-1/2 -translate-y-1/2 flex items-center">
+                  <div className="w-10 h-0.5 bg-gray-300"></div>
+                  <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center whitespace-nowrap">
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                      <div className="inline-flex items-center justify-center w-10 h-10 bg-primary/10 rounded-xl">
+                        <Award className="w-5 h-5 text-primary" />
+                      </div>
+                      <h4 className="text-sm font-bold text-gray-900">고문단</h4>
+                    </div>
+                    <div className="flex gap-5">
+                      {orgData.advisors.map((advisor, idx) => (
+                        <div key={idx} className="text-center">
+                          <p className="font-semibold text-primary text-sm">{advisor.name}</p>
+                          <p className="text-xs text-gray-500">{advisor.affiliation}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
               </div>
+            </div>
 
-              {/* Advisors Box */}
-              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 text-center lg:self-center max-w-xs">
-                <div className="flex items-center justify-center gap-2 mb-4">
+            {/* 모바일: 회장단 → 고문단 세로 배치 */}
+            <div className="lg:hidden flex flex-col items-center">
+              {/* 회장단 박스 */}
+              <div className="bg-white rounded-2xl border-2 border-primary shadow-lg px-10 py-8 text-center">
+                {/* 회장단 타이틀 */}
+                <div className="flex items-center justify-center gap-2 mb-5">
+                  <div className="inline-flex items-center justify-center w-10 h-10 bg-primary rounded-xl">
+                    <Crown className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">회장단</h3>
+                </div>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-8">
+                  {/* 학회장 */}
+                  <div className="text-center">
+                    <h4 className="text-sm font-bold text-gray-900 mb-1">학회장</h4>
+                    <p className="text-base font-semibold text-primary">{orgData.president.name}</p>
+                    <p className="text-sm text-gray-500">{orgData.president.affiliation}</p>
+                  </div>
+                  {/* 부회장들 */}
+                  {orgData.vicePresidents.map((vp, idx) => (
+                    <div key={idx} className="text-center">
+                      <h4 className="text-sm font-bold text-gray-900 mb-1">부회장</h4>
+                      <p className="text-base font-semibold text-primary">{vp.name}</p>
+                      <p className="text-sm text-gray-500">{vp.affiliation}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {/* 세로 연결선 */}
+              <div className="w-0.5 h-6 bg-gray-300"></div>
+              {/* 고문단 박스 */}
+              <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 text-center">
+                <div className="flex items-center justify-center gap-2 mb-3">
                   <div className="inline-flex items-center justify-center w-10 h-10 bg-primary/10 rounded-xl">
                     <Award className="w-5 h-5 text-primary" />
                   </div>
                   <h4 className="text-sm font-bold text-gray-900">고문단</h4>
                 </div>
-                <div className="space-y-2">
+                <div className="flex gap-5 justify-center">
                   {orgData.advisors.map((advisor, idx) => (
-                    <div key={idx}>
+                    <div key={idx} className="text-center">
                       <p className="font-semibold text-primary text-sm">{advisor.name}</p>
                       <p className="text-xs text-gray-500">{advisor.affiliation}</p>
                     </div>
@@ -102,8 +157,11 @@ const OrganizationPage = () => {
                 </div>
               </div>
             </div>
-            {/* Connecting line */}
-            <div className="w-0.5 h-8 bg-gray-300 mt-4"></div>
+
+            {/* 세로 연결선 (상임이사로) */}
+            <div className="flex justify-center">
+              <div className="w-0.5 h-8 bg-gray-300"></div>
+            </div>
           </div>
 
           {/* Standing Directors */}

@@ -21,13 +21,6 @@ const ExecutivesPage = () => {
       icon: Star,
       members: [
         {
-          name: '김덕삼',
-          role: '부회장',
-          affiliation: '대진대학교',
-          photo: null,
-          bio: []
-        },
-        {
           name: '토마스 김성은',
           role: '부회장',
           affiliation: '동국대학교',
@@ -89,9 +82,9 @@ const ExecutivesPage = () => {
           bio: []
         },
         {
-          name: '최해성',
+          name: '김덕삼',
           role: '학술이사',
-          affiliation: '연세대학교',
+          affiliation: '대진대학교',
           photo: null,
           bio: []
         },
@@ -126,7 +119,7 @@ const ExecutivesPage = () => {
         {
           name: '이대섭',
           role: 'AI 기술이사',
-          affiliation: 'Inervet',
+          affiliation: '주식회사 이너벳',
           photo: null,
           bio: []
         }
@@ -188,47 +181,45 @@ const ExecutivesPage = () => {
     }
   ];
 
-  const MemberCard = ({ member }) => {
+  const MemberRow = ({ member }) => {
     return (
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-6">
-        <div className="flex flex-col items-center text-center">
+      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-5">
+        <div className="flex items-start gap-5">
           {/* Photo/Avatar */}
-          <div className="mb-4">
+          <div className="flex-shrink-0">
             {member.photo ? (
               <img
                 src={member.photo}
                 alt={member.name}
-                className="w-24 h-24 rounded-full object-cover"
+                className="w-20 h-20 rounded-xl object-cover"
               />
             ) : (
-              <div className="w-24 h-24 rounded-full bg-primary/10 text-primary flex items-center justify-center text-3xl font-bold">
+              <div className="w-20 h-20 rounded-xl bg-primary/10 text-primary flex items-center justify-center text-2xl font-bold">
                 {member.name.charAt(0)}
               </div>
             )}
           </div>
 
-          {/* Name */}
-          <h3 className="text-lg font-bold text-gray-900 mb-2">{member.name}</h3>
+          {/* Info */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="text-base font-bold text-gray-900">{member.name}</h3>
+              <span className="px-2 py-0.5 bg-primary-50 text-primary text-xs font-medium rounded-full">
+                {member.role}
+              </span>
+            </div>
+            <p className="text-sm text-gray-500 mb-2">{member.affiliation}</p>
 
-          {/* Role Badge */}
-          <div className="px-2 py-0.5 bg-primary-50 text-primary text-xs rounded-full mb-2">
-            {member.role}
-          </div>
-
-          {/* Affiliation */}
-          <p className="text-sm text-gray-500 mb-4">{member.affiliation}</p>
-
-          {/* Bio */}
-          <div className="w-full pt-4 border-t border-gray-100">
+            {/* Bio / Career */}
             {member.bio.length === 0 ? (
               <p className="text-sm text-gray-400 italic">
                 이력사항이 등록되지 않았습니다.
               </p>
             ) : (
-              <ul className="text-sm text-gray-600 text-left space-y-1">
+              <ul className="text-sm text-gray-600 space-y-0.5">
                 {member.bio.map((item, idx) => (
                   <li key={idx} className="flex items-start">
-                    <span className="mr-2">•</span>
+                    <span className="mr-2 text-primary">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -269,16 +260,10 @@ const ExecutivesPage = () => {
                 </h2>
               </div>
 
-              {/* Member Cards Grid */}
-              <div
-                className={`grid gap-6 ${
-                  section.category === '학회장'
-                    ? 'grid-cols-1 max-w-md mx-auto'
-                    : 'grid-cols-1 sm:grid-cols-2 md:grid-cols-3'
-                }`}
-              >
+              {/* Member List */}
+              <div className="space-y-3">
                 {section.members.map((member, memberIdx) => (
-                  <MemberCard key={memberIdx} member={member} />
+                  <MemberRow key={memberIdx} member={member} />
                 ))}
               </div>
             </div>
