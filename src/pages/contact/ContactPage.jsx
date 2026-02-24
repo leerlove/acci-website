@@ -1,23 +1,44 @@
 import SubpageLayout from '../../components/common/SubpageLayout';
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle, AlertCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
+import { supabase } from '../../lib/supabase';
 
 const ContactPage = () => {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', category: '일반문의', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', category: '일반문의', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const categories = ['일반문의', '회원가입', '학술대회', '논문투고', '기타'];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const mailtoLink = `mailto:contact@kacci.or.kr?subject=${encodeURIComponent(`[${form.category}] ${form.subject}`)}&body=${encodeURIComponent(`이름: ${form.name}\n이메일: ${form.email}\n문의유형: ${form.category}\n\n${form.message}`)}`;
-    window.location.href = mailtoLink;
+    setLoading(true);
+    setError(null);
+
+    const { error: dbError } = await supabase.from('contact_inquiries').insert({
+      category: form.category,
+      name: form.name,
+      email: form.email,
+      phone: form.phone || null,
+      subject: form.subject,
+      message: form.message,
+    });
+
+    setLoading(false);
+
+    if (dbError) {
+      setError('문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요.');
+      return;
+    }
+
     setSubmitted(true);
   };
 
   const handleReset = () => {
-    setForm({ name: '', email: '', subject: '', category: '일반문의', message: '' });
+    setForm({ name: '', email: '', phone: '', subject: '', category: '일반문의', message: '' });
     setSubmitted(false);
+    setError(null);
   };
 
   return (
@@ -30,9 +51,9 @@ const ContactPage = () => {
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
-              <h2 className="text-xl font-bold text-gray-900 mb-2">이메일 앱이 열렸습니다</h2>
-              <p className="text-gray-600 mb-1">이메일 클라이언트에서 내용을 확인하고 전송해 주세요.</p>
-              <p className="text-sm text-gray-400 mb-6">이메일 앱이 열리지 않았다면 직접 contact@kacci.or.kr로 보내주세요.</p>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">문의가 접수되었습니다</h2>
+              <p className="text-gray-600 mb-1">빠른 시일 내에 답변 드리겠습니다.</p>
+              <p className="text-sm text-gray-400 mb-6">답변은 입력하신 이메일로 발송됩니다.</p>
               <button onClick={handleReset} className="btn-secondary text-sm">
                 새 문의 작성
               </button>
@@ -64,6 +85,16 @@ const ContactPage = () => {
                       placeholder="email@example.com"
                     />
                   </div>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">연락처</label>
+                  <input
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                    placeholder="010-0000-0000 (선택)"
+                  />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
@@ -101,11 +132,20 @@ const ContactPage = () => {
                     placeholder="문의 내용을 입력해주세요."
                   />
                 </div>
+                {error && (
+                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
+                    {error}
+                  </div>
+                )}
                 <div className="flex items-center justify-between">
-                  <p className="text-xs text-gray-400">이메일 클라이언트가 열리며, 직접 전송하셔야 합니다.</p>
-                  <button type="submit" className="btn-primary">
-                    <Send className="w-4 h-4 mr-2" />
-                    문의 보내기
+                  <p className="text-xs text-gray-400">문의 내용은 안전하게 저장됩니다.</p>
+                  <button type="submit" disabled={loading} className="btn-primary disabled:opacity-50">
+                    {loading ? (
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    ) : (
+                      <Send className="w-4 h-4 mr-2" />
+                    )}
+                    {loading ? '전송 중...' : '문의 보내기'}
                   </button>
                 </div>
               </form>

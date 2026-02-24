@@ -1,19 +1,34 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail, CheckCircle } from 'lucide-react';
+import { MapPin, Phone, Mail, CheckCircle, Loader2 } from 'lucide-react';
 import Logo from '../common/Logo';
+import { supabase } from '../../lib/supabase';
 
 const Footer = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterStatus, setNewsletterStatus] = useState(null); // null | 'success' | 'error'
+  const [newsletterStatus, setNewsletterStatus] = useState(null); // null | 'success' | 'error' | 'loading' | 'duplicate'
 
-  const handleNewsletterSubmit = (e) => {
+  const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
     if (!newsletterEmail || !newsletterEmail.includes('@')) {
       setNewsletterStatus('error');
       return;
     }
-    // TODO: 실제 뉴스레터 구독 API 연동 시 이곳에 fetch 추가
+
+    setNewsletterStatus('loading');
+
+    const { error } = await supabase.from('newsletter_subscribers').insert({ email: newsletterEmail });
+
+    if (error) {
+      if (error.code === '23505') {
+        setNewsletterStatus('duplicate');
+      } else {
+        setNewsletterStatus('error');
+      }
+      setTimeout(() => setNewsletterStatus(null), 5000);
+      return;
+    }
+
     setNewsletterStatus('success');
     setNewsletterEmail('');
     setTimeout(() => setNewsletterStatus(null), 5000);
@@ -119,6 +134,10 @@ const Footer = () => {
                   <CheckCircle className="w-4 h-4" />
                   <span>구독 신청이 완료되었습니다. 감사합니다!</span>
                 </div>
+              ) : newsletterStatus === 'duplicate' ? (
+                <div className="flex items-center gap-2 text-yellow-300 text-sm">
+                  <span>이미 구독 중인 이메일입니다.</span>
+                </div>
               ) : (
                 <form onSubmit={handleNewsletterSubmit} className="flex gap-2">
                   <input
@@ -130,8 +149,8 @@ const Footer = () => {
                       newsletterStatus === 'error' ? 'border-red-400' : 'border-white/20'
                     }`}
                   />
-                  <button type="submit" className="px-6 py-2.5 bg-secondary text-white font-medium rounded-lg hover:bg-secondary-dark transition-colors">
-                    구독
+                  <button type="submit" disabled={newsletterStatus === 'loading'} className="px-6 py-2.5 bg-secondary text-white font-medium rounded-lg hover:bg-secondary-dark transition-colors disabled:opacity-50">
+                    {newsletterStatus === 'loading' ? <Loader2 className="w-4 h-4 animate-spin" /> : '구독'}
                   </button>
                 </form>
               )}
