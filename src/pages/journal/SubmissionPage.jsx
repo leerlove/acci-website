@@ -1,5 +1,5 @@
 import SubpageLayout from '../../components/common/SubpageLayout';
-import { FileText, Upload, CheckCircle } from 'lucide-react';
+import { Upload, CheckCircle, Download } from 'lucide-react';
 
 const SubmissionPage = () => {
   const steps = [
@@ -34,15 +34,43 @@ const SubmissionPage = () => {
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">투고 규정 요약</h2>
-          <ul className="space-y-2">
-            {['원고는 한글 또는 영문으로 작성', '분량: 본문 기준 A4 20매 이내', '참고문헌 형식: APA 7th Edition 준수', '투고 시 연구윤리서약서 제출 필수', '투고 이메일: contact@kacci.or.kr'].map((item, i) => (
-              <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                <span>{item}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="flex-1">
+              <h2 className="text-xl font-bold text-gray-900 mb-4">투고 규정 요약</h2>
+              <ul className="space-y-2">
+                {[
+                  '원고는 한글파일(hwp)로 작성, 외국어 논문은 MS Word(docx) 가능',
+                  '글자 크기: 본문 11p, 각주·인용문단 9p / 줄 간격: 160%',
+                  '장·절·항·목 번호: Ⅰ. → 1. → ①',
+                  '국문초록 + 영문초록 각 1문단, 주제어 각 5개 이상 필수',
+                  '원고 체제: 제목 → 저자 → 국문초록 → 본문 → 참고문헌 → 영문초록',
+                  '본문 인용: (저자, 출판연도:페이지) 형식',
+                  '참고문헌: 국문 → 중문 → 서양문헌 순 배열',
+                  '표 제목은 <표 1> 형식으로 표 위에, 그림 제목은 [그림 1] 형식으로 그림 아래에 표기',
+                  '투고 이메일: contact@kacci.or.kr',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
+                    <CheckCircle className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="lg:w-56 flex-shrink-0">
+              <div className="bg-primary-50 rounded-xl border border-primary-100 p-5 text-center sticky top-28">
+                <Download className="w-8 h-8 text-primary mx-auto mb-3" />
+                <p className="font-semibold text-gray-900 text-sm mb-1">원고작성규정 전문</p>
+                <p className="text-xs text-gray-500 mb-4">상세 규정을 확인하세요</p>
+                <a
+                  href="/downloads/원고작성규정.pdf"
+                  download="원고작성규정.pdf"
+                  className="inline-block w-full px-4 py-2.5 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary-700 transition-colors"
+                >
+                  PDF 다운로드
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </SubpageLayout>

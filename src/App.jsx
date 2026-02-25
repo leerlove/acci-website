@@ -24,6 +24,7 @@ const EthicsPage = lazy(() => import('./pages/journal/EthicsPage'));
 const NoticePage = lazy(() => import('./pages/news/NoticePage'));
 const NewsListPage = lazy(() => import('./pages/news/NewsListPage'));
 const PressPage = lazy(() => import('./pages/news/PressPage'));
+const NewsDetailPage = lazy(() => import('./pages/news/NewsDetailPage'));
 const GuidePage = lazy(() => import('./pages/membership/GuidePage'));
 const BenefitsPage = lazy(() => import('./pages/membership/BenefitsPage'));
 const FeePage = lazy(() => import('./pages/membership/FeePage'));
@@ -32,6 +33,18 @@ const ResearchPage = lazy(() => import('./pages/resources/ResearchPage'));
 const GalleryPage = lazy(() => import('./pages/resources/GalleryPage'));
 const ContactPage = lazy(() => import('./pages/contact/ContactPage'));
 const FAQPage = lazy(() => import('./pages/contact/FAQPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+
+// Admin pages
+const LoginPage = lazy(() => import('./pages/admin/LoginPage'));
+const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
+const ProtectedRoute = lazy(() => import('./components/admin/ProtectedRoute'));
+const DashboardPage = lazy(() => import('./pages/admin/DashboardPage'));
+const InquiriesPage = lazy(() => import('./pages/admin/InquiriesPage'));
+const NewsletterPage = lazy(() => import('./pages/admin/NewsletterPage'));
+const NewsManagementPage = lazy(() => import('./pages/admin/NewsManagementPage'));
+const GalleryManagementPage = lazy(() => import('./pages/admin/GalleryManagementPage'));
 
 const App = () => {
   return (
@@ -73,8 +86,11 @@ const App = () => {
           {/* 소식 */}
           <Route path="/news" element={<Navigate to="/news/notice" replace />} />
           <Route path="/news/notice" element={<NoticePage />} />
+          <Route path="/news/notice/:id" element={<NewsDetailPage />} />
           <Route path="/news/updates" element={<NewsListPage />} />
+          <Route path="/news/updates/:id" element={<NewsDetailPage />} />
           <Route path="/news/press" element={<PressPage />} />
+          <Route path="/news/press/:id" element={<NewsDetailPage />} />
 
           {/* 회원 */}
           <Route path="/membership" element={<Navigate to="/membership/guide" replace />} />
@@ -92,8 +108,25 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/contact/faq" element={<FAQPage />} />
 
+          {/* 법적 페이지 */}
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+
           {/* 404 */}
           <Route path="*" element={<NotFoundPage />} />
+        </Route>
+
+        {/* 관리자 로그인 (RootLayout 밖) */}
+        <Route path="/admin/login" element={<LoginPage />} />
+
+        {/* 관리자 페이지 (인증 필요) */}
+        <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+          <Route index element={<Navigate to="/admin/dashboard" replace />} />
+          <Route path="dashboard" element={<DashboardPage />} />
+          <Route path="inquiries" element={<InquiriesPage />} />
+          <Route path="newsletter" element={<NewsletterPage />} />
+          <Route path="news" element={<NewsManagementPage />} />
+          <Route path="gallery" element={<GalleryManagementPage />} />
         </Route>
       </Routes>
     </Suspense>

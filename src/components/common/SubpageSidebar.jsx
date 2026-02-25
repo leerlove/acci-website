@@ -17,6 +17,7 @@ const SubpageSidebar = ({ sectionPath }) => {
             <NavLink
               key={child.path}
               to={child.path}
+              end={false}
               className={({ isActive }) =>
                 `block px-4 py-2.5 rounded-lg text-sm transition-all duration-200 ${
                   isActive

@@ -86,7 +86,9 @@ export const getBreadcrumbs = (pathname) => {
   crumbs.push({ name: section.name, path: section.children?.[0]?.path || section.path });
 
   if (section.children) {
-    const child = section.children.find((c) => c.path === pathname);
+    const child =
+      section.children.find((c) => c.path === pathname) ||
+      section.children.find((c) => pathname.startsWith(c.path + '/'));
     if (child) {
       crumbs.push({ name: child.name, path: child.path });
     }

@@ -29,14 +29,21 @@ CREATE TABLE IF NOT EXISTS newsletter_subscribers (
 ALTER TABLE contact_inquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 
--- 4. RLS 정책: anon 사용자가 INSERT만 가능 (읽기/수정/삭제 불가)
-CREATE POLICY "Allow anonymous insert" ON contact_inquiries
-  FOR INSERT TO anon
-  WITH CHECK (TRUE);
+-- 4. RLS 정책
+-- anon: INSERT만 가능 (읽기/수정/삭제 불가)
+-- 주의: Supabase JS client에서 .insert() 사용 시 .select() 체이닝 금지
+--       (return=representation 시 SELECT 정책 부재로 401 발생)
+CREATE POLICY "anon_insert_contact" ON contact_inquiries
+  FOR INSERT TO anon WITH CHECK (true);
 
-CREATE POLICY "Allow anonymous insert" ON newsletter_subscribers
-  FOR INSERT TO anon
-  WITH CHECK (TRUE);
+CREATE POLICY "anon_insert_newsletter" ON newsletter_subscribers
+  FOR INSERT TO anon WITH CHECK (true);
 
--- 5. 관리자(service_role)는 모든 작업 가능 (기본 bypass)
--- service_role은 RLS를 자동 bypass하므로 별도 정책 불필요
+-- authenticated: 모든 작업 가능
+CREATE POLICY "auth_all_contact" ON contact_inquiries
+  FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+CREATE POLICY "auth_all_newsletter" ON newsletter_subscribers
+  FOR ALL TO authenticated USING (true) WITH CHECK (true);
+
+-- 5. service_role은 RLS를 자동 bypass하므로 별도 정책 불필요

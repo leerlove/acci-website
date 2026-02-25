@@ -176,6 +176,9 @@ const Footer = () => {
               <Link to="/sitemap" className="text-white/50 text-sm hover:text-white transition-colors">
                 사이트맵
               </Link>
+              <Link to="/admin" className="text-white/30 text-xs hover:text-white/60 transition-colors">
+                관리자
+              </Link>
             </div>
           </div>
         </div>
