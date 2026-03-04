@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Plus, Edit, Trash2, Pin, Eye, X, ChevronLeft, ChevronRight, Search } from 'lucide-react';
+import { Plus, Edit, Trash2, Pin, Eye, X, ChevronLeft, ChevronRight, Search, Upload, Image, Paperclip, Loader2 } from 'lucide-react';
 
 const CATEGORIES = ['학회소식', '보도자료', '공지사항'];
 const PAGE_SIZE = 10;
@@ -35,6 +35,47 @@ export default function NewsManagementPage() {
   const [saving, setSaving] = useState(false);
   const [formError, setFormError] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [imageUploading, setImageUploading] = useState(false);
+  const [fileUploading, setFileUploading] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
+
+  const uploadToStorage = async (file, folder = 'images') => {
+    const ext = file.name.split('.').pop();
+    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { data, error } = await supabase.storage.from('news').upload(fileName, file);
+    if (error) throw error;
+    const { data: urlData } = supabase.storage.from('news').getPublicUrl(data.path);
+    return urlData.publicUrl;
+  };
+
+  const handleImageUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setImageUploading(true);
+    try {
+      const url = await uploadToStorage(file, 'images');
+      setForm(prev => ({ ...prev, image_url: url }));
+    } catch (err) {
+      setFormError('이미지 업로드 실패: ' + err.message);
+    } finally {
+      setImageUploading(false);
+    }
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setFileUploading(true);
+    try {
+      const url = await uploadToStorage(file, 'files');
+      setUploadedFiles(prev => [...prev, { name: file.name, url }]);
+    } catch (err) {
+      setFormError('파일 업로드 실패: ' + err.message);
+    } finally {
+      setFileUploading(false);
+      e.target.value = '';
+    }
+  };
 
   const fetchItems = useCallback(async () => {
     setLoading(true);
@@ -67,6 +108,7 @@ export default function NewsManagementPage() {
     setEditTarget(null);
     setForm(EMPTY_FORM);
     setFormError(null);
+    setUploadedFiles([]);
     setShowModal(true);
   };
 
@@ -83,6 +125,7 @@ export default function NewsManagementPage() {
       is_pinned: item.is_pinned,
     });
     setFormError(null);
+    setUploadedFiles([]);
     setShowModal(true);
   };
 
@@ -390,15 +433,57 @@ export default function NewsManagementPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">이미지 URL <span className="text-gray-400 font-normal">(선택)</span></label>
-                <input
-                  type="url"
-                  name="image_url"
-                  value={form.image_url}
-                  onChange={handleFormChange}
-                  placeholder="https://..."
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200"
-                />
+                <label className="block text-sm font-medium text-gray-700 mb-1">대표 이미지 <span className="text-gray-400 font-normal">(선택)</span></label>
+                {form.image_url ? (
+                  <div className="relative">
+                    <img src={form.image_url} alt="미리보기" className="w-full h-40 object-cover rounded-lg border border-gray-200" />
+                    <button
+                      type="button"
+                      onClick={() => setForm(prev => ({ ...prev, image_url: '' }))}
+                      className="absolute top-2 right-2 bg-white/80 p-1 rounded-full hover:bg-white transition-colors"
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
+                ) : (
+                  <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-200 rounded-lg cursor-pointer hover:border-primary-200 hover:bg-primary-50/30 transition-colors">
+                    {imageUploading ? (
+                      <Loader2 size={20} className="animate-spin text-primary" />
+                    ) : (
+                      <>
+                        <Image size={20} className="text-gray-400 mb-1" />
+                        <span className="text-xs text-gray-500">클릭하여 이미지 업로드</span>
+                      </>
+                    )}
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" disabled={imageUploading} />
+                  </label>
+                )}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">첨부파일 <span className="text-gray-400 font-normal">(선택)</span></label>
+                <label className="flex items-center gap-2 w-full px-3 py-2 border border-gray-200 rounded-lg cursor-pointer hover:border-primary-200 hover:bg-primary-50/30 transition-colors text-sm text-gray-500">
+                  {fileUploading ? (
+                    <Loader2 size={14} className="animate-spin text-primary" />
+                  ) : (
+                    <Paperclip size={14} />
+                  )}
+                  <span>{fileUploading ? '업로드 중...' : '파일 선택'}</span>
+                  <input type="file" onChange={handleFileUpload} className="hidden" disabled={fileUploading} />
+                </label>
+                {uploadedFiles.length > 0 && (
+                  <div className="mt-2 space-y-1">
+                    {uploadedFiles.map((f, i) => (
+                      <div key={i} className="flex items-center gap-2 text-xs bg-gray-50 px-3 py-1.5 rounded-lg">
+                        <Paperclip size={12} className="text-gray-400 flex-shrink-0" />
+                        <a href={f.url} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline truncate flex-1">{f.name}</a>
+                        <button type="button" onClick={() => navigator.clipboard.writeText(f.url)} className="text-gray-400 hover:text-primary text-[10px] flex-shrink-0 whitespace-nowrap">URL복사</button>
+                        <button type="button" onClick={() => setUploadedFiles(prev => prev.filter((_, idx) => idx !== i))} className="text-gray-400 hover:text-red-500 flex-shrink-0">
+                          <X size={12} />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="flex items-center gap-6">
                 <label className="flex items-center gap-2 cursor-pointer">

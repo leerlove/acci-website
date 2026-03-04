@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, CheckCircle2, Circle, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Circle, ArrowRight } from 'lucide-react';
 import SubpageLayout from '../../components/common/SubpageLayout';
 
 const JOURNAL_INFO = [
@@ -28,14 +28,11 @@ const LatestPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Journal Cover Placeholder */}
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 flex flex-col items-center justify-center min-h-[280px]">
-            <div className="w-full max-w-[180px] aspect-[3/4] border-2 border-dashed border-gray-200 rounded-lg flex flex-col items-center justify-center gap-3 bg-gray-50">
-              <BookOpen className="w-10 h-10 text-primary/30" />
-              <p className="text-xs text-gray-400 text-center px-3 leading-relaxed">
-                창간호 표지
-                <br />
-                준비중
-              </p>
-            </div>
+            <img
+              src="/images/journal-cover-vol1.png"
+              alt="반려문화 창간호 표지"
+              className="w-full max-w-[200px] rounded-lg shadow-md border border-gray-200"
+            />
             <p className="mt-4 text-xs text-gray-400">반려문화 창간호 (2025. 6.)</p>
           </div>
 

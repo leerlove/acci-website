@@ -10,7 +10,7 @@ const GreetingPage = () => {
             {/* Chairman photo */}
             <div className="flex-shrink-0">
               <img
-                src="/images/chairman.png"
+                src="/images/chairman2.jpg"
                 alt="유광석 학회장"
                 className="w-48 h-60 rounded-2xl object-cover shadow-md border border-gray-200"
               />
