@@ -18,6 +18,7 @@ const EMPTY_FORM = {
   content: '',
   author: '',
   image_url: '',
+  attachments: [],
   is_published: true,
   is_pinned: false,
 };
@@ -121,11 +122,12 @@ export default function NewsManagementPage() {
       content: item.content || '',
       author: item.author || '',
       image_url: item.image_url || '',
+      attachments: item.attachments || [],
       is_published: item.is_published,
       is_pinned: item.is_pinned,
     });
     setFormError(null);
-    setUploadedFiles([]);
+    setUploadedFiles(item.attachments || []);
     setShowModal(true);
   };
 
@@ -148,14 +150,15 @@ export default function NewsManagementPage() {
     setSaving(true);
     setFormError(null);
     try {
+      const saveData = { ...form, attachments: uploadedFiles };
       if (editTarget) {
         const { error: err } = await supabase
           .from('news')
-          .update({ ...form, updated_at: new Date().toISOString() })
+          .update({ ...saveData, updated_at: new Date().toISOString() })
           .eq('id', editTarget.id);
         if (err) throw err;
       } else {
-        const { error: err } = await supabase.from('news').insert(form);
+        const { error: err } = await supabase.from('news').insert(saveData);
         if (err) throw err;
       }
       closeModal();
@@ -436,7 +439,7 @@ export default function NewsManagementPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">대표 이미지 <span className="text-gray-400 font-normal">(선택)</span></label>
                 {form.image_url ? (
                   <div className="relative">
-                    <img src={form.image_url} alt="미리보기" className="w-full h-40 object-cover rounded-lg border border-gray-200" />
+                    <img src={form.image_url} alt="미리보기" className="w-full max-h-60 object-contain rounded-lg border border-gray-200 bg-gray-50" />
                     <button
                       type="button"
                       onClick={() => setForm(prev => ({ ...prev, image_url: '' }))}

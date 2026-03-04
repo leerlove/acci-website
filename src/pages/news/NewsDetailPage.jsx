@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation, Link } from 'react-router-dom';
 import SubpageLayout from '../../components/common/SubpageLayout';
-import { ArrowLeft, Calendar, User, Eye, Loader2, AlertCircle } from 'lucide-react';
+import { ArrowLeft, Calendar, User, Eye, Loader2, AlertCircle, Paperclip } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 const CATEGORY_MAP = {
@@ -34,7 +34,7 @@ const NewsDetailPage = () => {
     const fetchArticle = async () => {
       const { data, error } = await supabase
         .from('news')
-        .select('id, category, title, content, summary, image_url, author, view_count, created_at')
+        .select('id, category, title, content, summary, image_url, attachments, author, view_count, created_at')
         .eq('id', id)
         .eq('is_published', true)
         .single();
@@ -133,7 +133,7 @@ const NewsDetailPage = () => {
             <img
               src={article.image_url}
               alt={article.title}
-              className="w-full max-h-96 object-cover"
+              className="w-full max-h-[500px] object-contain"
             />
           </div>
         )}
@@ -142,6 +142,30 @@ const NewsDetailPage = () => {
         <div className="px-6 sm:px-8 py-8">
           {renderContent(article.content)}
         </div>
+
+        {/* Attachments */}
+        {article.attachments?.length > 0 && (
+          <div className="px-6 sm:px-8 py-5 border-t border-gray-100">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1.5">
+              <Paperclip className="w-4 h-4" />
+              첨부파일
+            </h3>
+            <div className="space-y-2">
+              {article.attachments.map((file, i) => (
+                <a
+                  key={i}
+                  href={file.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-sm text-primary hover:underline"
+                >
+                  <Paperclip className="w-3.5 h-3.5 flex-shrink-0" />
+                  {file.name}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
         <div className="px-6 sm:px-8 py-5 border-t border-gray-100 bg-gray-50/50">
