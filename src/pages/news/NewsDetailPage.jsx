@@ -51,8 +51,13 @@ const NewsDetailPage = () => {
     fetchArticle();
   }, [id, meta]);
 
+  const isHTML = (str) => /<[a-z][\s\S]*>/i.test(str);
+
   const renderContent = (text) => {
     if (!text) return null;
+    if (isHTML(text)) {
+      return <div className="prose prose-gray max-w-none" dangerouslySetInnerHTML={{ __html: text }} />;
+    }
     return text.split(/\n\n+/).map((para, i) => (
       <p key={i} className="text-gray-700 leading-relaxed whitespace-pre-wrap mb-4">
         {para}

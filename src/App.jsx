@@ -45,6 +45,9 @@ const InquiriesPage = lazy(() => import('./pages/admin/InquiriesPage'));
 const NewsletterPage = lazy(() => import('./pages/admin/NewsletterPage'));
 const NewsManagementPage = lazy(() => import('./pages/admin/NewsManagementPage'));
 const GalleryManagementPage = lazy(() => import('./pages/admin/GalleryManagementPage'));
+const ExecutivesManagementPage = lazy(() => import('./pages/admin/ExecutivesManagementPage'));
+const MembersManagementPage = lazy(() => import('./pages/admin/MembersManagementPage'));
+const ApplicationPage = lazy(() => import('./pages/membership/ApplicationPage'));
 
 const App = () => {
   return (
@@ -95,6 +98,7 @@ const App = () => {
           {/* 회원 */}
           <Route path="/membership" element={<Navigate to="/membership/guide" replace />} />
           <Route path="/membership/guide" element={<GuidePage />} />
+          <Route path="/membership/apply" element={<ApplicationPage />} />
           <Route path="/membership/benefits" element={<BenefitsPage />} />
           <Route path="/membership/fee" element={<FeePage />} />
 
@@ -127,6 +131,8 @@ const App = () => {
           <Route path="newsletter" element={<NewsletterPage />} />
           <Route path="news" element={<NewsManagementPage />} />
           <Route path="gallery" element={<GalleryManagementPage />} />
+          <Route path="executives" element={<ExecutivesManagementPage />} />
+          <Route path="members" element={<MembersManagementPage />} />
         </Route>
       </Routes>
     </Suspense>

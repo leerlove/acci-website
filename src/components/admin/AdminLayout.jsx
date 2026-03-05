@@ -7,6 +7,8 @@ import {
   Mail,
   Newspaper,
   Image,
+  Users,
+  UserPlus,
   ExternalLink,
   LogOut,
   Menu,
@@ -19,6 +21,8 @@ const NAV_ITEMS = [
   { to: '/admin/newsletter', label: '뉴스레터', icon: Mail },
   { to: '/admin/news', label: '소식 관리', icon: Newspaper },
   { to: '/admin/gallery', label: '갤러리', icon: Image },
+  { to: '/admin/executives', label: '임원 관리', icon: Users },
+  { to: '/admin/members', label: '회원 신청', icon: UserPlus },
 ];
 
 const BRAND_COLOR = '#6B2D4A';

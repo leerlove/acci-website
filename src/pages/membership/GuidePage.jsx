@@ -1,6 +1,6 @@
 import SubpageLayout from '../../components/common/SubpageLayout';
 import { Link } from 'react-router-dom';
-import { UserPlus, CheckCircle, ArrowRight, Mail } from 'lucide-react';
+import { UserPlus, CheckCircle, ArrowRight } from 'lucide-react';
 
 const GuidePage = () => {
   const memberTypes = [
@@ -33,7 +33,7 @@ const GuidePage = () => {
 
   const steps = [
     { num: '01', title: '자격 확인', desc: '회원 유형별 자격요건을 확인합니다.' },
-    { num: '02', title: '가입 신청', desc: '이메일로 가입신청서를 제출합니다.' },
+    { num: '02', title: '가입 신청', desc: '온라인으로 가입신청서를 제출합니다.' },
     { num: '03', title: '심사 및 승인', desc: '이사회의 심사를 거쳐 승인됩니다.' },
     { num: '04', title: '회비 납부', desc: '승인 후 회비를 납부합니다.' },
   ];
@@ -89,11 +89,11 @@ const GuidePage = () => {
         <div className="bg-gradient-soft rounded-2xl p-8 text-center border border-primary/10">
           <UserPlus className="w-10 h-10 text-primary mx-auto mb-3" />
           <h3 className="text-xl font-bold text-gray-900 mb-2">회원가입 신청</h3>
-          <p className="text-gray-600 mb-6">아래 이메일로 가입신청서를 보내주세요.</p>
-          <a href="mailto:contact@kacci.or.kr?subject=회원가입 신청" className="btn-primary">
-            <Mail className="w-4 h-4 mr-2" />
-            contact@kacci.or.kr
-          </a>
+          <p className="text-gray-600 mb-6">온라인으로 간편하게 가입 신청하세요.</p>
+          <Link to="/membership/apply" className="btn-primary">
+            <UserPlus className="w-4 h-4 mr-2" />
+            신청하기
+          </Link>
         </div>
       </div>
     </SubpageLayout>

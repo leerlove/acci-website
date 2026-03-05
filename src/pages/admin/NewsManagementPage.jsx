@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase';
 import { Plus, Edit, Trash2, Pin, Eye, X, ChevronLeft, ChevronRight, Search, Upload, Image, Paperclip, Loader2 } from 'lucide-react';
+import RichTextEditor from '../../components/admin/RichTextEditor';
 
 const CATEGORIES = ['학회소식', '보도자료', '공지사항'];
 const PAGE_SIZE = 10;
@@ -145,7 +146,7 @@ export default function NewsManagementPage() {
   const handleSave = async (e) => {
     e.preventDefault();
     if (!form.title.trim()) { setFormError('제목을 입력하세요.'); return; }
-    if (!form.content.trim()) { setFormError('내용을 입력하세요.'); return; }
+    if (!form.content.replace(/<[^>]*>/g, '').trim()) { setFormError('내용을 입력하세요.'); return; }
     if (!form.author.trim()) { setFormError('작성자를 입력하세요.'); return; }
     setSaving(true);
     setFormError(null);
@@ -365,7 +366,7 @@ export default function NewsManagementPage() {
       {/* 모달 */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
-          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-3xl max-h-[90vh] flex flex-col">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
               <h2 className="text-lg font-bold text-gray-900">
                 {editTarget ? '게시글 수정' : '새 글 작성'}
@@ -426,13 +427,10 @@ export default function NewsManagementPage() {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">내용 <span className="text-red-500">*</span></label>
-                <textarea
-                  name="content"
+                <RichTextEditor
                   value={form.content}
-                  onChange={handleFormChange}
+                  onChange={(html) => setForm(prev => ({ ...prev, content: html }))}
                   placeholder="게시글 본문 내용"
-                  rows={8}
-                  className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-200 resize-y"
                 />
               </div>
               <div>
